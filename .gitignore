@@ -1,0 +1,10 @@
+build/
+build-tsan/
+bin/
+bin-tsan/
+logs/
+*.o
+*.d
+testes/resultados/
+build-asan/
+bin-asan/
