@@ -235,7 +235,7 @@ Os arquivos `config/testes_*.json` usam o mesmo galpão com filas maiores de cai
 | `anunciar_robo ID [X Y]` / `anunciar_robo --n N [--intervalo-ms T]` | Anuncia robôs ao gestor (na Etapa 2 o anúncio virá do simulador). |
 | `injetar_evento defeito ID on\|off`, `bateria ID NIVEL`, `comunicacao ID off\|on` | Injeta eventos de hardware no `DriverStub` do robô. |
 | `injetar_evento parada-geral`, `liberar-parada`, `caixa ID TAM BAIA ZONA` | Comandos de operador ao organizador. |
-| `injetar_evento parar\|retomar\|reconhecer\|abortar ID`, `modo ID auto\|manual`, `destino ID X Y`, `remover-robo ID` | Comandos de operador encaminhados a um robô. `remover-robo` devolve as vagas de passagem de um robô que o operador retirou do galpão. |
+| `injetar_evento parar\|retomar\|reconhecer\|abortar ID`, `modo ID auto\|manual`, `destino ID X Y`, `remover-robo ID` | Comandos de operador encaminhados a um robô. `remover-robo` devolve as vagas de passagem de um robô que o operador retirou do galpão. Passar um robô para `manual` no meio de uma missão aborta a equipe dele e devolve a caixa ao despacho. |
 | `amr_monitor [--uma-vez] [--csv] [--intervalo-ms T]` | Lê a tabela da frota (sem alterá-la) e mostra robôs, passagens e equipes. |
 | `limpar_ipc` | Remove objetos de IPC remanescentes. |
 | `rajada_comandos ID N` | Usada no teste T-04: N missões com um `PARAR` no meio, de uma vez na fila do robô. |
@@ -297,4 +297,4 @@ third_party/nlohmann/  json.hpp
 - O `DriverStub` é uma cinemática simplificada (ponto material com velocidade e aceleração limitadas); a física e a geração de eventos passam ao simulador na Etapa 2, por trás da mesma interface `DriverES`.
 - A rota alternativa após espera longa numa passagem é pedida por robôs sozinhos; uma equipe parada na entrada de uma passagem gera alarme na supervisão, mas continua esperando a vaga.
 - Posições e afastamentos são trocados em metros (`float`), e não em decímetros como no catálogo de mensagens do relatório.
-- Etapa 2: `DriverMQTT`, anúncio de robôs e comandos via MQTT (Mosquitto), `T_ORG_HMI`, `T_COL_PUB`, simulador e tela de operação em Python, e a análise de quantos robôs o hardware suporta.
+- Etapa 2: `DriverMQTT`, anúncio de robôs e comandos via MQTT, `T_ORG_HMI`, `T_COL_PUB`, simulador em Node.js, tela de operação no navegador com o galpão em 3D, e a análise de quantos robôs o hardware suporta. Esse trabalho está no repositório [projeto-final-atr](https://github.com/felipesvm/projeto-final-atr).

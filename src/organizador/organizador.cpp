@@ -505,6 +505,9 @@ void Organizador::tratar_operador(const CorpoOperador& op, Efeitos& ef) {
             }
             if (op.tipo_robo == TipoMsg::ABORTAR && it->second.equipe >= 0)
                 abortar_equipe(it->second.equipe, "comando do operador", ef);
+            // passar para manual no meio de uma missão devolve a caixa ao despacho
+            if (op.tipo_robo == TipoMsg::MODO && op.cmd.modo == ModoOperacao::MANUAL && it->second.equipe >= 0)
+                abortar_equipe(it->second.equipe, "robô passou para o modo manual", ef);
             Mensagem m = nova_mensagem(op.tipo_robo, ORIGEM_ORGANIZADOR);
             m.comando = op.cmd;
             enviar_robo(op.robo, m, ef);
